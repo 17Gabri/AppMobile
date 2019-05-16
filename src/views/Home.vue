@@ -108,5 +108,8 @@ a {
 .card {
   color: black;
 }
+.v-input__slot {
+  margin-top: 30px;
+}
 </style>
 

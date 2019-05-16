@@ -1,6 +1,11 @@
 <template>
   <v-container v-if="movies.length != 0">
     <v-layout justify-center class="search mt-5">
+      <v-flex xs4>
+        <v-btn fab small color="cyan" dark to="/year">
+          <v-icon dark>arrow_back</v-icon>
+        </v-btn>
+      </v-flex>
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
           <template v-slot:append>
@@ -11,7 +16,7 @@
     </v-layout>
     <v-layout justify-center>
       <v-flex xs12>
-        <v-card v-for="(movie, index) in filteredMovies" :key="index">
+        <v-card v-for="(movie, index) in moviesToShow" :key="index">
           <router-link :to="'/movie/' + Number(movie.id)" class="card">
             <v-layout row>
               <v-flex xs7>
@@ -53,7 +58,7 @@
       </v-flex>
     </v-layout>
     <div class="text-xs-center">
-      <v-pagination circle v-model="page" :length="6"></v-pagination>
+      <v-pagination circle v-model="currentPage" :length="numOfPages" @click></v-pagination>
     </div>
   </v-container>
 </template>
@@ -67,9 +72,8 @@ export default {
         "https://api.themoviedb.org/3/list/78677?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
       movies: [],
       searchValue: "",
-      //   pages: Math.ceil(this.movies.length / 10),
-      page: 1,
-      numeroPelis: 10
+      perPage: 10,
+      currentPage: 1
     };
   },
   methods: {
@@ -84,77 +88,6 @@ export default {
         );
     },
     allYears() {
-      //   if (this.year == "70") {
-      //     return [
-      //       "1970",
-      //       "1971",
-      //       "1972",
-      //       "1973",
-      //       "1974",
-      //       "1975",
-      //       "1976",
-      //       "1977",
-      //       "1978",
-      //       "1979"
-      //     ];
-      //   }
-      //   if (this.year == "80") {
-      //     return [
-      //       "1980",
-      //       "1981",
-      //       "1982",
-      //       "1983",
-      //       "1984",
-      //       "1985",
-      //       "1986",
-      //       "1987",
-      //       "1988",
-      //       "1989"
-      //     ];
-      //   }
-      //   if (this.year == "90") {
-      //     return [
-      //       "1990",
-      //       "1991",
-      //       "1992",
-      //       "1993",
-      //       "1994",
-      //       "1995",
-      //       "1996",
-      //       "1997",
-      //       "1998",
-      //       "1999"
-      //     ];
-      //   }
-      //   if (this.year == "100") {
-      //     return [
-      //       "2000",
-      //       "2001",
-      //       "2002",
-      //       "2003",
-      //       "2004",
-      //       "2005",
-      //       "2006",
-      //       "2007",
-      //       "2008",
-      //       "2009"
-      //     ];
-      //   }
-      //   if (this.year == "110") {
-      //     return [
-      //       "2010",
-      //       "2011",
-      //       "2012",
-      //       "2013",
-      //       "2014",
-      //       "2015",
-      //       "2016",
-      //       "2017",
-      //       "2018",
-      //       "2019"
-      //     ];
-      //   }
-
       switch (this.year) {
         case "50":
           return [
@@ -302,27 +235,26 @@ export default {
           ];
       }
     }
-
-    // pagination() {
-    //   let pagination = {};
-    //   let paginas = Math.ceil(this.movies.length / this.numeroPelis);
-    //   let inicio = 0;
-    //   let final = 10;
-    //   for (let i = 0; i < paginas; i++) {
-    //     let corte = this.filteredMovies.slice(inicio, final);
-    //     pagination["slider" + i] = corte;
-
-    //     inicio = inicio + this.numeroPelis;
-    //     final = final + this.numeroPelis;
-    //   }
-    //   return pagination;
-    // }
   },
   computed: {
-    filteredMovies() {
-      return this.movies.filter(movie =>
-        movie.title.toLowerCase().includes(this.searchValue.toLowerCase())
-      );
+    offset() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    limit() {
+      return this.offset + this.perPage;
+    },
+    numOfPages() {
+      return Math.ceil(this.movies.length / this.perPage);
+    },
+    moviesToShow() {
+      if (this.offset > this.movies.length) {
+        this.currentPage = this.numOfPages;
+      }
+      return this.movies
+        .filter(movie =>
+          movie.title.toLowerCase().includes(this.searchValue.toLowerCase())
+        )
+        .slice(this.offset, this.limit);
     }
   },
   created() {
@@ -332,4 +264,10 @@ export default {
 </script>
 
 <style>
+.v-input__slot {
+  margin-top: 30px;
+}
+.flex.xs4 {
+  margin-top: 30px;
+}
 </style>

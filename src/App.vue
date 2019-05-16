@@ -22,10 +22,10 @@
 
       <v-toolbar-title class="white--text">Title</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn fab dark color="cyan" to="/">
+      <v-btn fab small dark color="cyan" to="/">
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn fab dark color="cyan">
+      <v-btn fab small dark color="cyan">
         <v-icon>add</v-icon>
       </v-btn>
     </v-toolbar>
