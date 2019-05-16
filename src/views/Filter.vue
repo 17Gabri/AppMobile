@@ -9,12 +9,6 @@
         </v-text-field>
       </v-flex>
     </v-layout>
-
-    <v-layout justify-center>
-      <v-flex xs12 class="Subtitle">
-        <h1>Búsqueda por género</h1>
-      </v-flex>
-    </v-layout>
     <v-layout justify-center>
       <v-flex xs12>
         <v-card v-for="(movie, index) in filteredMovies" :key="index">

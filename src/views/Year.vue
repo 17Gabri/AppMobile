@@ -2,7 +2,33 @@
   <v-layout column>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/genre/28">
+        <router-link to="/year/50">
+          <v-img :src="require('../assets/50.jpg')" aspect-ratio="2">
+            <v-card-title>
+              <div class="titulo">
+                <h1 class="whiteFont">Década 1950-1960</h1>
+              </div>
+            </v-card-title>
+          </v-img>
+        </router-link>
+      </v-card>
+    </v-flex>
+    <v-flex xs12 sm6 offset-sm3 class="mt-5">
+      <v-card>
+        <router-link to="/year/60">
+          <v-img :src="require('../assets/60.jpg')" aspect-ratio="2">
+            <v-card-title>
+              <div class="titulo">
+                <h1 class="whiteFont">Década 1960-1970</h1>
+              </div>
+            </v-card-title>
+          </v-img>
+        </router-link>
+      </v-card>
+    </v-flex>
+    <v-flex xs12 sm6 offset-sm3 class="mt-5">
+      <v-card>
+        <router-link to="/year/70">
           <v-img :src="require('../assets/70.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
@@ -15,7 +41,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/genre/12">
+        <router-link to="/year/80">
           <v-img :src="require('../assets/80.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
@@ -28,7 +54,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/genre/16">
+        <router-link to="/year/90">
           <v-img :src="require('../assets/90.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
@@ -41,7 +67,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/genre/35">
+        <router-link to="/year/100">
           <v-img :src="require('../assets/00.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
@@ -54,7 +80,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/genre/80">
+        <router-link to="/year/110">
           <v-img :src="require('../assets/10.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">

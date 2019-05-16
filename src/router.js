@@ -5,6 +5,7 @@ import Movie from "./views/Movie.vue";
 import Genre from "./views/Genre.vue";
 import Year from "./views/Year.vue";
 import GenreFilter from "./views/Filter.vue";
+import FilterYear from "./views/FilterYear.vue";
 import Rating from "./views/Rating.vue";
 
 Vue.use(Router);
@@ -39,6 +40,12 @@ export default new Router({
       name: "year",
       component: Year,
 
+    },
+    {
+      path: "/year/:year",
+      name: "FilterYear",
+      component: FilterYear,
+      props: true
     },
     {
       path: "/rating",
