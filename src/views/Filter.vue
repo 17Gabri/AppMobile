@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="movies.length != 0">
     <v-layout justify-center class="search mt-5">
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
@@ -12,12 +12,12 @@
 
     <v-layout justify-center>
       <v-flex xs12 class="Subtitle">
-        <h1>En Cartelera</h1>
+        <h1>Búsqueda por género</h1>
       </v-flex>
     </v-layout>
     <v-layout justify-center>
       <v-flex xs12>
-        <v-card v-for="movie in filteredMovies" :key="movie.title">
+        <v-card v-for="(movie, index) in filteredMovies" :key="index">
           <router-link :to="'/movie/' + Number(movie.id)" class="card">
             <v-layout row>
               <v-flex xs7>
@@ -58,55 +58,70 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <div class="text-xs-center">
+      <v-pagination circle v-model="page" :length="6"></v-pagination>
+    </div>
   </v-container>
 </template>
 
 <script>
 export default {
+  props: ["genre"],
   data() {
     return {
       url:
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=18661481496a15370caf925d682d33b0&language=es-ES&page=1",
-      actuallyMovies: [],
-      searchValue: ""
+        "https://api.themoviedb.org/3/list/78677?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+      movies: [],
+      searchValue: "",
+      //   pages: Math.ceil(this.movies.length / 10),
+      page: 1,
+      numeroPelis: 10
     };
   },
   methods: {
-    getActually() {
+    getMovie() {
       fetch(this.url)
         .then(json => json.json())
-        .then(data => (this.actuallyMovies = data.results));
+        .then(
+          data =>
+            (this.movies = data.items.filter(m => {
+              let filter = false;
+              m.genre_ids.forEach(element => {
+                if (element == Number(this.genre)) {
+                  filter = true;
+                }
+              });
+              return filter;
+            }))
+        );
     }
+    // pagination() {
+    //   let pagination = {};
+    //   let paginas = Math.ceil(this.movies.length / this.numeroPelis);
+    //   let inicio = 0;
+    //   let final = 10;
+    //   for (let i = 0; i < paginas; i++) {
+    //     let corte = this.filteredMovies.slice(inicio, final);
+    //     pagination["slider" + i] = corte;
+
+    //     inicio = inicio + this.numeroPelis;
+    //     final = final + this.numeroPelis;
+    //   }
+    //   return pagination;
+    // }
   },
   computed: {
     filteredMovies() {
-      return this.actuallyMovies.filter(movie =>
+      return this.movies.filter(movie =>
         movie.title.toLowerCase().includes(this.searchValue.toLowerCase())
       );
     }
   },
   created() {
-    this.getActually();
+    this.getMovie();
   }
 };
 </script>
-<style>
-.v-list.card.theme--light {
-  background-color: rgba(0, 0, 139, 0.658);
-  color: white;
-}
-.search {
-  margin-top: 10px;
-}
-.Subtitle {
-  text-align: center;
-  margin-bottom: 10px;
-}
-a {
-  text-decoration: none;
-}
-.card {
-  color: black;
-}
-</style>
 
+<style>
+</style>
