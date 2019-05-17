@@ -65,7 +65,7 @@
 
 <script>
 export default {
-  props: ["year"],
+  props: ["rating"],
   data() {
     return {
       url:
@@ -83,103 +83,24 @@ export default {
         .then(
           data =>
             (this.movies = data.items.filter(m => {
-              return this.allYears().includes(m.release_date.split("-")[0]);
+              return this.allRatings().includes(
+                m.vote_average.toString().split(".")[0]
+              );
             }))
         );
     },
-    allYears() {
-      switch (this.year) {
-        case "50":
-          return [
-            "1950",
-            "1951",
-            "1952",
-            "1953",
-            "1954",
-            "1955",
-            "1956",
-            "1957",
-            "1958",
-            "1959"
-          ];
-        case "60":
-          return [
-            "1960",
-            "1961",
-            "1962",
-            "1963",
-            "1964",
-            "1965",
-            "1966",
-            "1967",
-            "1968",
-            "1969"
-          ];
-        case "70":
-          return [
-            "1970",
-            "1971",
-            "1972",
-            "1973",
-            "1974",
-            "1975",
-            "1976",
-            "1977",
-            "1978",
-            "1979"
-          ];
-        case "80":
-          return [
-            "1980",
-            "1981",
-            "1982",
-            "1983",
-            "1984",
-            "1985",
-            "1986",
-            "1987",
-            "1988",
-            "1989"
-          ];
-        case "90":
-          return [
-            "1990",
-            "1991",
-            "1992",
-            "1993",
-            "1994",
-            "1995",
-            "1996",
-            "1997",
-            "1998",
-            "1999"
-          ];
-        case "100":
-          return [
-            "2000",
-            "2001",
-            "2002",
-            "2003",
-            "2004",
-            "2005",
-            "2006",
-            "2007",
-            "2008",
-            "2009"
-          ];
-        case "110":
-          return [
-            "2010",
-            "2011",
-            "2012",
-            "2013",
-            "2014",
-            "2015",
-            "2016",
-            "2017",
-            "2018",
-            "2019"
-          ];
+    allRatings() {
+      switch (this.rating) {
+        case "1":
+          return ["9"];
+        case "2":
+          return ["8"];
+        case "3":
+          return ["7", "6"];
+        case "4":
+          return ["5"];
+        case "5":
+          return ["4", "3", "2"];
       }
     }
   },
@@ -211,10 +132,4 @@ export default {
 </script>
 
 <style>
-.v-input__slot {
-  margin-top: 30px;
-}
-.flex.xs4 {
-  margin-top: 30px;
-}
 </style>
