@@ -1,11 +1,6 @@
 <template>
   <v-container v-if="movies.length != 0">
     <v-layout justify-center class="search mt-5">
-      <v-flex xs4>
-        <v-btn fab small color="cyan" dark to="/year">
-          <v-icon dark>arrow_back</v-icon>
-        </v-btn>
-      </v-flex>
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
           <template v-slot:append>
@@ -69,7 +64,7 @@ export default {
   data() {
     return {
       url:
-        "https://api.themoviedb.org/3/list/78677?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+        "https://api.themoviedb.org/3/list/104324?api_key=18661481496a15370caf925d682d33b0&language=es_ES",
       movies: [],
       searchValue: "",
       perPage: 10,

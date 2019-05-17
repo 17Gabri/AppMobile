@@ -1,11 +1,6 @@
 <template>
   <v-container v-if="movies.length != 0">
     <v-layout justify-center class="search mt-5">
-      <v-flex xs4>
-        <v-btn fab small color="cyan" dark to="/genre">
-          <v-icon dark>arrow_back</v-icon>
-        </v-btn>
-      </v-flex>
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
           <template v-slot:append>

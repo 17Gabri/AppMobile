@@ -58,7 +58,7 @@
           <v-img :src="require('../assets/r5.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
-                <h1 class="whiteFont">Antes de la eutanasia</h1>
+                <h1 class="whiteFont">Cuando él/ella está sol@ en casa</h1>
               </div>
             </v-card-title>
           </v-img>

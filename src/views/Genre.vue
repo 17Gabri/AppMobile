@@ -255,7 +255,7 @@ export default {
   data() {
     return {
       url:
-        "https://api.themoviedb.org/3/list/78677?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+        "https://api.themoviedb.org/3/list/104324?api_key=18661481496a15370caf925d682d33b0&language=es_ES",
       movies: []
     };
   },

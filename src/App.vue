@@ -22,6 +22,9 @@
 
       <v-toolbar-title class="white--text">Title</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn fab small color="cyan" dark href="javascript:history.back()">
+        <v-icon dark>arrow_back</v-icon>
+      </v-btn>
       <v-btn fab small dark color="cyan" to="/">
         <v-icon>home</v-icon>
       </v-btn>
