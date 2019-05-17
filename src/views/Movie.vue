@@ -7,22 +7,6 @@
           data-sizes="auto"
           :src="`https://image.tmdb.org/t/p/w185_and_h278_bestv2${movieDetails.poster_path}`"
         ></v-img>
-        <v-btn
-          v-if="show"
-          v-on:click="show = !show"
-          :key="activeFab.icon"
-          :color="activeFab.color"
-          dark
-          fab
-          fixed
-          bottom
-          right
-          href="#content"
-        >
-          <transition name="fade">
-            <v-icon>{{ activeFab.icon }}</v-icon>
-          </transition>
-        </v-btn>
         <v-card-title primary-title id="content">
           <v-flex xs12>
             <v-card dark color="primary">
