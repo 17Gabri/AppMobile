@@ -1,6 +1,6 @@
 <template>
   <v-layout v-if="movieDetails.length != 0">
-    <v-flex xs12 sm6 offset-sm3 fill-width fill-height class="mt-5">
+    <v-flex xs12 sm6 offset-sm3 fill-width fill-height>
       <v-card class="card">
         <v-img
           class="poster"
@@ -113,5 +113,8 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
+}
+.container {
+  padding-top: 0px;
 }
 </style>

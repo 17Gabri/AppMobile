@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout justify-center class="search mt-5">
+    <v-layout justify-center class="search">
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
           <template v-slot:append>
@@ -110,6 +110,9 @@ a {
 }
 .v-input__slot {
   margin-top: 30px;
+}
+.container {
+  padding-top: 0px;
 }
 </style>
 

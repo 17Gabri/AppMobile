@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="movies.length != 0">
-    <v-layout justify-center class="search mt-5">
+    <v-layout justify-center class="search">
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
           <template v-slot:append>
@@ -132,4 +132,7 @@ export default {
 </script>
 
 <style>
+.container {
+  padding-top: 0px;
+}
 </style>

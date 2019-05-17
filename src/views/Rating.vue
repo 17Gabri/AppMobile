@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs12 sm6 offset-sm3 class="mt-5">
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <router-link to="/rating/1">
           <v-img :src="require('../assets/r1.jpg')" aspect-ratio="2">
@@ -79,5 +79,8 @@ export default {};
 .titulo {
   background-color: rgba(128, 128, 128, 0.521);
   width: 100%;
+}
+.container {
+  padding-top: 0px;
 }
 </style>

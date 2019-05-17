@@ -8,6 +8,10 @@
           </v-btn>
         </template>
         <v-list dark>
+          <v-list-tile to="/">
+            <v-list-tile-title>Inicio</v-list-tile-title>
+          </v-list-tile>
+
           <v-list-tile to="/genre">
             <v-list-tile-title>Buscar por Género</v-list-tile-title>
           </v-list-tile>
@@ -17,6 +21,9 @@
           <v-list-tile to="/rating">
             <v-list-tile-title>Buscar por Valoración</v-list-tile-title>
           </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-title>Log In</v-list-tile-title>
+          </v-list-tile>
         </v-list>
       </v-menu>
 
@@ -25,13 +32,8 @@
       <v-btn fab small color="cyan" dark href="javascript:history.back()">
         <v-icon dark>arrow_back</v-icon>
       </v-btn>
-      <v-btn fab small dark color="cyan" to="/">
-        <v-icon>home</v-icon>
-      </v-btn>
-      <v-btn fab small dark color="cyan">
-        <v-icon>add</v-icon>
-      </v-btn>
     </v-toolbar>
+    <v-breadcrumbs class="mt-5" :items="items"></v-breadcrumbs>
     <router-view></router-view>
   </v-app>
 </template>
@@ -41,9 +43,38 @@ export default {
   name: "App",
   components: {},
   data() {
-    return {};
+    return {
+      items: [
+        {
+          text: "Inicio",
+          disabled: false,
+          to: "/"
+        },
+        {
+          text: "Género",
+          disabled: false,
+          to: "/genre"
+        },
+        {
+          text: "Año",
+          disabled: false,
+          to: "/year"
+        },
+        {
+          text: "Valoración",
+          disabled: false,
+          to: "/rating"
+        }
+      ]
+    };
   }
 };
 </script>
+<style>
+.container {
+  padding-top: 0px;
+}
+</style>
+
 
 
