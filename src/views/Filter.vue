@@ -10,6 +10,9 @@
       </v-flex>
     </v-layout>
     <v-layout justify-center>
+      <h1 class="mb-4">{{getGenre}}</h1>
+    </v-layout>
+    <v-layout justify-center>
       <v-flex xs12>
         <v-card v-for="(movie, index) in moviesToShow" :key="index">
           <router-link :to="'/movie/' + Number(movie.id)" class="card">
@@ -65,10 +68,89 @@ export default {
     return {
       url:
         "https://api.themoviedb.org/3/list/78677?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+
       movies: [],
       searchValue: "",
       perPage: 10,
-      currentPage: 1
+      currentPage: 1,
+      genres: [
+        {
+          id: 28,
+          name: "Acción"
+        },
+        {
+          id: 12,
+          name: "Aventura"
+        },
+        {
+          id: 16,
+          name: "Animación"
+        },
+        {
+          id: 35,
+          name: "Comedia"
+        },
+        {
+          id: 80,
+          name: "Crimen"
+        },
+        {
+          id: 99,
+          name: "Documental"
+        },
+        {
+          id: 18,
+          name: "Drama"
+        },
+        {
+          id: 10751,
+          name: "Familia"
+        },
+        {
+          id: 14,
+          name: "Fantasía"
+        },
+        {
+          id: 36,
+          name: "Historia"
+        },
+        {
+          id: 27,
+          name: "Terror"
+        },
+        {
+          id: 10402,
+          name: "Música"
+        },
+        {
+          id: 9648,
+          name: "Misterio"
+        },
+        {
+          id: 10749,
+          name: "Romance"
+        },
+        {
+          id: 878,
+          name: "Ciencia ficción"
+        },
+        {
+          id: 10770,
+          name: "Película de TV"
+        },
+        {
+          id: 53,
+          name: "Suspense"
+        },
+        {
+          id: 10752,
+          name: "Bélica"
+        },
+        {
+          id: 37,
+          name: "Western"
+        }
+      ]
     };
   },
   methods: {
@@ -108,6 +190,9 @@ export default {
           movie.title.toLowerCase().includes(this.searchValue.toLowerCase())
         )
         .slice(this.offset, this.limit);
+    },
+    getGenre() {
+      return this.genres.find(g => g.id == this.genre).name;
     }
   },
   created() {

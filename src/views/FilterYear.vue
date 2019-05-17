@@ -10,6 +10,9 @@
       </v-flex>
     </v-layout>
     <v-layout justify-center>
+      <h1 class="mb-4">Decada de los {{year}}'s</h1>
+    </v-layout>
+    <v-layout justify-center>
       <v-flex xs12>
         <v-card v-for="(movie, index) in moviesToShow" :key="index">
           <router-link :to="'/movie/' + Number(movie.id)" class="card">
@@ -53,7 +56,7 @@
       </v-flex>
     </v-layout>
     <div class="text-xs-center">
-      <v-pagination circle v-model="currentPage" :length="numOfPages"></v-pagination>
+      <v-pagination circle v-model="currentPage" total-visible="5" :length="numOfPages"></v-pagination>
     </div>
   </v-container>
 </template>
@@ -149,7 +152,7 @@ export default {
             "1998",
             "1999"
           ];
-        case "100":
+        case "2000":
           return [
             "2000",
             "2001",
@@ -162,7 +165,7 @@ export default {
             "2008",
             "2009"
           ];
-        case "110":
+        case "2010":
           return [
             "2010",
             "2011",

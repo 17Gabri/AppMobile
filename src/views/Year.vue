@@ -67,7 +67,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/year/100">
+        <router-link to="/year/2000">
           <v-img :src="require('../assets/00.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">
@@ -80,7 +80,7 @@
     </v-flex>
     <v-flex xs12 sm6 offset-sm3 class="mt-5">
       <v-card>
-        <router-link to="/year/110">
+        <router-link to="/year/2010">
           <v-img :src="require('../assets/10.jpg')" aspect-ratio="2">
             <v-card-title>
               <div class="titulo">

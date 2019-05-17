@@ -12,7 +12,7 @@
 
     <v-layout justify-center>
       <v-flex xs12 class="Subtitle">
-        <h1>En Cartelera</h1>
+        <h1 class="mb-4">En Cartelera</h1>
       </v-flex>
     </v-layout>
     <v-layout justify-center>
