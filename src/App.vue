@@ -7,7 +7,7 @@
         <v-btn fab small color="cyan" dark href="javascript:history.back()">
           <v-icon dark>arrow_back</v-icon>
         </v-btn>
-        <v-btn fab small color="cyan" dark href="javascript:history.back()">
+        <v-btn fab small color="cyan" dark @click="login()">
           <v-icon dark>account_circle</v-icon>
         </v-btn>
       </v-toolbar>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: "App",
   components: {},
@@ -49,6 +51,14 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    login() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider);
+
+      console.log("Login");
+    }
   }
 };
 </script>
