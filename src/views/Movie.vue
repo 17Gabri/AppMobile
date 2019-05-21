@@ -50,7 +50,12 @@
               <h2>
                 <u>Chat</u>
               </h2>
-              <div id="mensajes"></div>
+              <v-layout justify-center>
+                <v-flex xs6>
+                  <v-btn color="black" @click="getMessages">Lee las críticas</v-btn>
+                </v-flex>
+              </v-layout>
+              <v-flex id="mensajes"></v-flex>
               <v-textarea
                 id="text"
                 outline
@@ -60,7 +65,7 @@
               ></v-textarea>
               <v-layout justify-center>
                 <v-flex xs6>
-                  <v-btn color="success" @click="sendMessage">Escribe tu crítica</v-btn>
+                  <v-btn color="black" @click="sendMessage">Escribe tu crítica</v-btn>
                 </v-flex>
               </v-layout>
             </v-card>
@@ -108,8 +113,8 @@ export default {
       firebase
         .database()
         .ref(this.movieDetails.title)
-        .on("value", function(data) {
-          console.log(data.val());
+        .on("value", data => {
+          console.log(this.movieDetails.title);
 
           document.getElementById("mensajes").innerHTML = "";
 
@@ -129,7 +134,6 @@ export default {
   },
   created() {
     this.getDetails();
-    this.getMessages();
   }
 };
 </script>
