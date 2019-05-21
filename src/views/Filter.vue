@@ -56,7 +56,7 @@
       </v-flex>
     </v-layout>
     <div class="text-xs-center">
-      <v-pagination circle v-model="currentPage" :length="numOfPages"></v-pagination>
+      <v-pagination circle v-model="currentPage" total-visible="5" :length="numOfPages"></v-pagination>
     </div>
   </v-container>
 </template>

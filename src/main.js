@@ -11,6 +11,7 @@ new Vue({
   router,
   store,
   render: h => h(App),
+
   created() {
     var firebaseConfig = {
       apiKey: "AIzaSyC4plRXFektXJJPGqj5YJinlynKqOU2BCA",
@@ -24,4 +25,12 @@ new Vue({
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   }
+
 }).$mount("#app");
+
+// {
+//   "rules": {
+//     ".read": false,
+//     ".write": false
+//   }
+// }

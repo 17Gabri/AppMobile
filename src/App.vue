@@ -7,9 +7,37 @@
         <v-btn fab small color="cyan" dark href="javascript:history.back()">
           <v-icon dark>arrow_back</v-icon>
         </v-btn>
-        <v-btn fab small color="cyan" dark @click="login()">
+        <v-btn fab small color="cyan" dark @click="login()" v-if="user == null">
           <v-icon dark>account_circle</v-icon>
         </v-btn>
+        <v-speed-dial
+          v-else
+          v-model="fab"
+          :top="top"
+          :bottom="bottom"
+          :right="right"
+          :left="left"
+          :direction="direction"
+          :open-on-hover="hover"
+          :transition="transition"
+        >
+          <template v-slot:activator>
+            <v-btn v-model="fab" small color="cyan" dark fab>
+              <v-avatar>
+                <img :src="user.photoURL" alt="Avatar">
+              </v-avatar>
+
+              <v-icon>keyboard_arrow_up</v-icon>
+            </v-btn>
+          </template>
+
+          <v-btn fab dark small color="indigo">
+            <v-icon>info</v-icon>
+          </v-btn>
+          <v-btn fab dark small color="red">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-speed-dial>
       </v-toolbar>
       <v-breadcrumbs class="mt-5" :items="items"></v-breadcrumbs>
       <v-btn fab bottom right fixed small color="cyan" dark href="#top">
@@ -28,6 +56,17 @@ export default {
   components: {},
   data() {
     return {
+      direction: "bottom",
+      fab: false,
+      fling: false,
+      hover: false,
+      tabs: null,
+      top: false,
+      right: false,
+      bottom: false,
+      left: false,
+      transition: "slide-y-reverse-transition",
+      user: null,
       items: [
         {
           text: "Inicio",
@@ -55,14 +94,106 @@ export default {
   methods: {
     login() {
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider);
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          this.currentUser();
+        });
+    },
+    logout() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signOutWithPopup(provider);
+    },
 
-      console.log("Login");
+    currentUser() {
+      var user = firebase.auth().currentUser;
+      this.user = user;
+
+      if (user != null) {
+        user.providerData.forEach(function(profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+          console.log("  Photo URL: " + profile.photoURL);
+        });
+      }
+    },
+    // updateProfile() {
+    //   var user = firebase.auth().currentUser;
+
+    //   user
+    //     .updateProfile({
+    //       displayName: "Jane Q. User",
+    //       photoURL: "https://example.com/jane-q-user/profile.jpg"
+    //     })
+    //     .then(function() {
+    //       // Update successful.
+    //     })
+    //     .catch(function(error) {
+    //       // An error happened.
+    //     });
+    // }
+    showUser() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        var userZone = document.getElementById("userZone");
+        var wrapProducts = document.getElementById("wrapProducts");
+        var userName = document.getElementById("userName");
+        if (user) {
+          userZone.style.visibility = "visible";
+          wrapProducts.style.paddingTop = "40px";
+          userName.innerHTML = user.displayName;
+          window.loginORlogout(LOGOUT);
+          console.log(user.displayName);
+        } else {
+          userZone.style.visibility = "hidden";
+          wrapProducts.style.paddingTop = "10px";
+          userName.innerHTML = "";
+          window.loginORlogout(LOGIN);
+          console.log("sin usuario");
+        }
+      });
+    }
+  },
+  computed: {
+    activeFab() {
+      switch (this.tabs) {
+        case "one":
+          return { class: "purple", icon: "account_circle" };
+        case "two":
+          return { class: "red", icon: "edit" };
+        case "three":
+          return { class: "green", icon: "keyboard_arrow_up" };
+        default:
+          return {};
+      }
+    }
+  },
+  watch: {
+    top(val) {
+      this.bottom = !val;
+    },
+    right(val) {
+      this.left = !val;
+    },
+    bottom(val) {
+      this.top = !val;
+    },
+    left(val) {
+      this.right = !val;
     }
   }
 };
 </script>
 <style>
+#create .v-speed-dial {
+  position: absolute;
+}
+
+#create .v-btn--floating {
+  position: relative;
+}
 .container {
   padding-top: 0px;
 }
