@@ -23,14 +23,12 @@
         >
           <template v-slot:activator>
             <v-btn v-model="fab" small color="cyan" dark fab>
-              <v-avatar>
-                <img :src="user.photoURL" alt="Avatar">
+              <v-avatar v-if="!fab">
+                <img :src="user.photoURL" class="avatar" alt="Avatar">
               </v-avatar>
-
-              <v-icon>keyboard_arrow_up</v-icon>
+              <v-icon v-else>keyboard_arrow_up</v-icon>
             </v-btn>
           </template>
-
           <v-btn fab dark small color="indigo">
             <v-icon>info</v-icon>
           </v-btn>
@@ -120,21 +118,7 @@ export default {
         });
       }
     },
-    // updateProfile() {
-    //   var user = firebase.auth().currentUser;
 
-    //   user
-    //     .updateProfile({
-    //       displayName: "Jane Q. User",
-    //       photoURL: "https://example.com/jane-q-user/profile.jpg"
-    //     })
-    //     .then(function() {
-    //       // Update successful.
-    //     })
-    //     .catch(function(error) {
-    //       // An error happened.
-    //     });
-    // }
     showUser() {
       firebase.auth().onAuthStateChanged(function(user) {
         var userZone = document.getElementById("userZone");
@@ -183,6 +167,9 @@ export default {
     left(val) {
       this.right = !val;
     }
+  },
+  created() {
+    this.showUser();
   }
 };
 </script>
@@ -196,6 +183,12 @@ export default {
 }
 .container {
   padding-top: 0px;
+}
+img.avatar {
+  height: 40px;
+  width: 40px;
+  position: relative;
+  bottom: 4px;
 }
 </style>
 

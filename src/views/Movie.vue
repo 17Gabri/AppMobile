@@ -50,6 +50,19 @@
               <h2>
                 <u>Chat</u>
               </h2>
+              <div id="mensajes"></div>
+              <v-textarea
+                id="text"
+                outline
+                name="input-7-4"
+                label="Escribe tu crítica aquí"
+                placeholder="Escribe tu crítica aquí"
+              ></v-textarea>
+              <v-layout justify-center>
+                <v-flex xs6>
+                  <v-btn color="success" @click="sendMessage">Escribe tu crítica</v-btn>
+                </v-flex>
+              </v-layout>
             </v-card>
           </v-flex>
         </v-card-title>
@@ -59,6 +72,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   data() {
     return {
@@ -74,6 +89,37 @@ export default {
       fetch(this.url + this.id + this.url2)
         .then(json => json.json())
         .then(data => (this.movieDetails = data));
+    },
+    sendMessage() {
+      let name = firebase.auth().currentUser.displayName;
+      let texto = document.getElementById("text").value;
+
+      let messageToSend = {
+        nombre: name,
+        mensaje: texto
+      };
+
+      firebase
+        .database()
+        .ref(this.movieDetails.title)
+        .push(messageToSend);
+    },
+    getMessages() {
+      firebase
+        .database()
+        .ref(this.movieDetails.title)
+        .on("value", function(data) {
+          console.log(data.val());
+
+          document.getElementById("mensajes").innerHTML = "";
+
+          for (let key in data.val()) {
+            let element = data.val()[key];
+            let p = document.createElement("p");
+            p.append(element.mensaje);
+            document.getElementById("mensajes").append(p);
+          }
+        });
     }
   },
   computed: {
@@ -83,6 +129,7 @@ export default {
   },
   created() {
     this.getDetails();
+    this.getMessages();
   }
 };
 </script>
