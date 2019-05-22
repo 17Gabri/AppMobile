@@ -167,9 +167,6 @@ export default {
     left(val) {
       this.right = !val;
     }
-  },
-  created() {
-    this.showUser();
   }
 };
 </script>

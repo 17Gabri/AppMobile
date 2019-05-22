@@ -52,21 +52,29 @@
               </h2>
               <v-layout justify-center>
                 <v-flex xs6>
-                  <v-btn color="black" @click="getMessages">Lee las críticas</v-btn>
+                  <v-btn
+                    color="black"
+                    @click="getMessages"
+                  >{{ hidden ? 'Lee las críticas' : 'Oculta las críticas' }}</v-btn>
                 </v-flex>
               </v-layout>
-              <v-flex id="mensajes"></v-flex>
-              <v-textarea
-                id="text"
-                outline
-                name="input-7-4"
-                label="Escribe tu crítica aquí"
-                placeholder="Escribe tu crítica aquí"
-              ></v-textarea>
-              <v-layout justify-center>
-                <v-flex xs6>
-                  <v-btn color="black" @click="sendMessage">Escribe tu crítica</v-btn>
-                </v-flex>
+              <v-layout column v-show="!hidden">
+                <v-flex id="mensajes"></v-flex>
+                <v-textarea
+                  ref="form"
+                  :clearable="true"
+                  :auto-grow="true"
+                  id="text"
+                  outline
+                  name="input-7-4"
+                  label="Escribe tu crítica aquí"
+                  placeholder="Escribe tu crítica aquí"
+                ></v-textarea>
+                <v-layout justify-center>
+                  <v-flex xs6>
+                    <v-btn color="black" @click="sendMessage">Escribe tu crítica</v-btn>
+                  </v-flex>
+                </v-layout>
               </v-layout>
             </v-card>
           </v-flex>
@@ -82,6 +90,7 @@ import firebase from "firebase";
 export default {
   data() {
     return {
+      hidden: true,
       url: "https://api.themoviedb.org/3/movie/",
       url2: "?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
       movieDetails: [],
@@ -108,6 +117,7 @@ export default {
         .database()
         .ref(this.movieDetails.title)
         .push(messageToSend);
+      this.$refs.form.reset();
     },
     getMessages() {
       firebase
@@ -121,10 +131,11 @@ export default {
           for (let key in data.val()) {
             let element = data.val()[key];
             let p = document.createElement("p");
-            p.append(element.mensaje);
+            p.append(element.nombre + ": " + element.mensaje);
             document.getElementById("mensajes").append(p);
           }
         });
+      this.hidden = !this.hidden;
     }
   },
   computed: {
