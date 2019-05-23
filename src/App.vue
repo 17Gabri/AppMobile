@@ -32,7 +32,7 @@
           <v-btn fab dark small color="indigo">
             <v-icon>info</v-icon>
           </v-btn>
-          <v-btn fab dark small color="red" @click="logout()" v-if="user != null">
+          <v-btn fab dark small color="red" @click="logout()">
             <v-icon>close</v-icon>
           </v-btn>
         </v-speed-dial>
@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       direction: "bottom",
+      chat: true,
       fab: false,
       fling: false,
       hover: false,
@@ -103,9 +104,7 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(function() {
-          console.log("Bye");
-        });
+        .then(function() {});
     },
 
     currentUser() {
@@ -177,7 +176,8 @@ export default {
       if (user) {
         this.currentUser();
       } else {
-        alert("Desconectado");
+        this.user = null;
+        this.chat = false;
       }
     });
   }
