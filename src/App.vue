@@ -32,7 +32,7 @@
           <v-btn fab dark small color="indigo">
             <v-icon>info</v-icon>
           </v-btn>
-          <v-btn fab dark small color="red">
+          <v-btn fab dark small color="red" @click="logout()" v-if="user != null">
             <v-icon>close</v-icon>
           </v-btn>
         </v-speed-dial>
@@ -100,8 +100,12 @@ export default {
         });
     },
     logout() {
-      var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signOutWithPopup(provider);
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("Bye");
+        });
     },
 
     currentUser() {
@@ -167,6 +171,15 @@ export default {
     left(val) {
       this.right = !val;
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.currentUser();
+      } else {
+        alert("Desconectado");
+      }
+    });
   }
 };
 </script>
