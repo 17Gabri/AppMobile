@@ -50,12 +50,12 @@
               <h2>
                 <u>Chat</u>
               </h2>
-              <v-layout v-show="this.$store.state.user == null">
+              <v-layout v-if="user == null">
                 <v-flex xs6>
                   <v-btn color="black" @click="login()">Debes iniciar sesión para ver el chat</v-btn>
                 </v-flex>
               </v-layout>
-              <v-layout justify-center v-show="this.$store.state.user != null">
+              <v-layout justify-center v-if="user != null">
                 <v-flex xs6>
                   <v-btn
                     color="black"
@@ -63,7 +63,7 @@
                   >{{ hidden ? 'Lee las críticas' : 'Oculta las críticas' }}</v-btn>
                 </v-flex>
               </v-layout>
-              <v-layout column v-show="!hidden">
+              <v-layout column v-show="!hidden" v-if=" user">
                 <v-flex id="mensajes"></v-flex>
                 <v-textarea
                   ref="form"
@@ -144,37 +144,21 @@ export default {
     },
     login() {
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => {
-          this.currentUser();
-        });
-    },
-    currentUser() {
-      var user = firebase.auth().currentUser;
-      this.user = user;
-
-      if (user != null) {
-        user.providerData.forEach(function(profile) {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-          console.log("  Photo URL: " + profile.photoURL);
-        });
-      }
+      firebase.auth().signInWithPopup(provider);
     }
   },
   computed: {
     activeFab() {
       return { color: "cyan", icon: "keyboard_arrow_down" };
+    },
+    user() {
+      return this.$store.state.user;
     }
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.currentUser();
+        this.$store.state.user = user;
       } else {
         this.$store.state.user = null;
       }

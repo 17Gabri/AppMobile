@@ -65,7 +65,6 @@ export default {
       bottom: false,
       left: false,
       transition: "slide-y-reverse-transition",
-      user: null,
       items: [
         {
           text: "Inicio",
@@ -93,33 +92,13 @@ export default {
   methods: {
     login() {
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => {
-          this.currentUser();
-        });
+      firebase.auth().signInWithPopup(provider);
     },
     logout() {
       firebase
         .auth()
         .signOut()
         .then(function() {});
-    },
-
-    currentUser() {
-      var user = firebase.auth().currentUser;
-      this.user = user;
-
-      if (user != null) {
-        user.providerData.forEach(function(profile) {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-          console.log("  Photo URL: " + profile.photoURL);
-        });
-      }
     },
 
     showUser() {
@@ -155,6 +134,9 @@ export default {
         default:
           return {};
       }
+    },
+    user() {
+      return this.$store.state.user;
     }
   },
   watch: {
@@ -174,7 +156,7 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.currentUser();
+        this.$store.state.user = user;
       } else {
         this.$store.state.user = null;
       }
