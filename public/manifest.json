@@ -1,0 +1,13 @@
+{
+    "short_name": "GabiFilms",
+    "name": "GabiFilms Movie Searcher",
+    // "icons": [{
+    //         "src": "launcher-icon-1x.png",
+    //         "type": "image/png",
+    //         "sizes": "48x48"
+    //     }
+
+    // ],
+    "start_url": "gabifilms.netlify.com",
+    "display": "standalone"
+}

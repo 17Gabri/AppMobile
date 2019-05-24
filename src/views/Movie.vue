@@ -50,15 +50,14 @@
               <h2>
                 <u>Chat</u>
               </h2>
-              <v-layout>
+              <v-layout v-show="this.$store.state.user == null">
+                <v-flex xs6>
+                  <v-btn color="black" @click="login()">Debes iniciar sesión para ver el chat</v-btn>
+                </v-flex>
+              </v-layout>
+              <v-layout justify-center v-show="this.$store.state.user != null">
                 <v-flex xs6>
                   <v-btn
-                    v-if="this.$store.state.user == null"
-                    color="black"
-                    @click="login()"
-                  >Debes iniciar sesión para ver el chat</v-btn>
-                  <v-btn
-                    v-else
                     color="black"
                     @click="getMessages"
                   >{{ hidden ? 'Lee las críticas' : 'Oculta las críticas' }}</v-btn>
