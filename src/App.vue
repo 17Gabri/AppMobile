@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       direction: "bottom",
-      chat: true,
+
       fab: false,
       fling: false,
       hover: false,
@@ -176,8 +176,7 @@ export default {
       if (user) {
         this.currentUser();
       } else {
-        this.user = null;
-        this.chat = false;
+        this.$store.state.user = null;
       }
     });
   }

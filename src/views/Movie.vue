@@ -50,9 +50,15 @@
               <h2>
                 <u>Chat</u>
               </h2>
-              <v-layout justify-center>
+              <v-layout>
                 <v-flex xs6>
                   <v-btn
+                    v-if="this.$store.state.user == null"
+                    color="black"
+                    @click="login()"
+                  >Debes iniciar sesión para ver el chat</v-btn>
+                  <v-btn
+                    v-else
                     color="black"
                     @click="getMessages"
                   >{{ hidden ? 'Lee las críticas' : 'Oculta las críticas' }}</v-btn>
@@ -136,6 +142,29 @@ export default {
           }
         });
       this.hidden = !this.hidden;
+    },
+    login() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          this.currentUser();
+        });
+    },
+    currentUser() {
+      var user = firebase.auth().currentUser;
+      this.user = user;
+
+      if (user != null) {
+        user.providerData.forEach(function(profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+          console.log("  Photo URL: " + profile.photoURL);
+        });
+      }
     }
   },
   computed: {
@@ -144,6 +173,13 @@ export default {
     }
   },
   created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.currentUser();
+      } else {
+        this.$store.state.user = null;
+      }
+    });
     this.getDetails();
   }
 };
