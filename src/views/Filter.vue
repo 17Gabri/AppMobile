@@ -22,8 +22,11 @@
                   <div>
                     <div class="headline">{{movie.title}}</div>
                     <div>
-                      <p>Fecha de lanzamiento:</p>
-                      <p>{{movie.release_date}}</p>
+                      <p>
+                        Fecha de lanzamiento:
+                        <br>
+                        {{movie.release_date}}
+                      </p>
                     </div>
                     <div>
                       <v-layout class="mb-2">

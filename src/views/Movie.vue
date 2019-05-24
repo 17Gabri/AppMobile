@@ -139,8 +139,6 @@ export default {
         .database()
         .ref(this.movieDetails.title)
         .on("value", data => {
-          console.log(this.movieDetails.title);
-
           document.getElementById("mensajes").innerHTML = "";
 
           for (let key in data.val()) {
