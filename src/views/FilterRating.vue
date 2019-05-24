@@ -47,13 +47,6 @@
             </v-layout>
           </router-link>
           <v-divider light></v-divider>
-          <v-card-actions class="pa-3">
-            Valora esta película
-            <v-spacer></v-spacer>
-            <div>
-              <v-rating background-color="orange lighten-3" color="orange" small></v-rating>
-            </div>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

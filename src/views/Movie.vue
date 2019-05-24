@@ -31,7 +31,17 @@
                       v-if="movieDetails.belongs_to_collection != null"
                     >Colección: {{movieDetails.belongs_to_collection.name}}</p>
                     <p>Producido por: {{movieDetails.production_companies[0].name}}</p>
-                    <p>Valoración: {{movieDetails.vote_average}}/10</p>
+                    <p>
+                      Valoración:
+                      <v-rating
+                        v-model="rating"
+                        background-color="orange lighten-3"
+                        color="orange"
+                        dense
+                        :readonly="true"
+                        :half-increments="true"
+                      ></v-rating>
+                    </p>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -153,6 +163,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    rating() {
+      return this.movieDetails.vote_average / 2;
     }
   },
   created() {
