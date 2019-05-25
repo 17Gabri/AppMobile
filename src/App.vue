@@ -2,7 +2,9 @@
   <v-app>
     <v-layout id="top">
       <v-toolbar dark color="black" fixed height="60px">
-        <v-toolbar-title class="white--text">Title</v-toolbar-title>
+        <v-toolbar-title class="white--text">
+          <img class="logo" src="./assets/logo.png" height="75" width="75">
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn fab small color="cyan" dark href="javascript:history.back()">
           <v-icon dark>arrow_back</v-icon>
@@ -37,7 +39,7 @@
           </v-btn>
         </v-speed-dial>
       </v-toolbar>
-      <v-breadcrumbs class="mt-5" :items="items"></v-breadcrumbs>
+      <v-breadcrumbs class="bread" :items="items"></v-breadcrumbs>
       <v-btn fab bottom right fixed small color="cyan" dark href="#top">
         <v-icon dark>keyboard_arrow_up</v-icon>
       </v-btn>
@@ -180,6 +182,12 @@ img.avatar {
   width: 40px;
   position: relative;
   bottom: 4px;
+}
+.logo {
+  margin-top: 25px;
+}
+.bread {
+  margin-top: 60px;
 }
 </style>
 
