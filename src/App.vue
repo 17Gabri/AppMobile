@@ -57,7 +57,6 @@ export default {
   data() {
     return {
       direction: "bottom",
-
       fab: false,
       fling: false,
       hover: false,
