@@ -55,6 +55,11 @@
       <v-pagination circle v-model="currentPage" total-visible="5" :length="numOfPages"></v-pagination>
     </div>
   </v-container>
+  <v-container v-else>
+    <v-flex class="loader">
+      <v-progress-circular indeterminate color="primary" size="99" width="8"></v-progress-circular>
+    </v-flex>
+  </v-container>
 </template>
 
 <script>
@@ -206,5 +211,9 @@ export default {
 }
 .container {
   padding-top: 0px;
+}
+.loader {
+  display: flex;
+  justify-content: center;
 }
 </style>

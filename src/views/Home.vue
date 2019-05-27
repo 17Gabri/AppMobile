@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="actuallyMovies.length != 0">
     <v-layout justify-center class="search">
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
@@ -55,6 +55,11 @@
       </v-flex>
     </v-layout>
   </v-container>
+  <v-container v-else>
+    <v-flex class="loader">
+      <v-progress-circular indeterminate color="primary" size="99" width="8"></v-progress-circular>
+    </v-flex>
+  </v-container>
 </template>
 
 <script>
@@ -109,6 +114,10 @@ a {
 }
 .container {
   padding-top: 0px;
+}
+.loader {
+  display: flex;
+  justify-content: center;
 }
 </style>
 

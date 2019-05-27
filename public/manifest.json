@@ -1,0 +1,22 @@
+{
+    "short_name": "GabiFilms",
+    "name": "GabiFilms Movie Searcher",
+    "icons": [{
+            "src": "./logo.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "./logo.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "./logo.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone"
+}
