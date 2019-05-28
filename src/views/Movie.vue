@@ -76,6 +76,7 @@
               <v-layout column v-show="!hidden" v-if=" user">
                 <v-flex id="mensajes"></v-flex>
                 <v-textarea
+                  color="black"
                   ref="form"
                   :clearable="true"
                   :auto-grow="true"
@@ -201,5 +202,16 @@ export default {
 .loader {
   display: flex;
   justify-content: center;
+}
+h1.section {
+  padding: 20px;
+}
+#mensajes {
+  background-color: rgba(255, 255, 255, 0.788);
+  color: black;
+  border: solid 3px darkblue;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 10px;
 }
 </style>

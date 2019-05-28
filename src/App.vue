@@ -101,7 +101,6 @@ export default {
         .signOut()
         .then(function() {});
     },
-
     showUser() {
       firebase.auth().onAuthStateChanged(function(user) {
         var userZone = document.getElementById("userZone");
