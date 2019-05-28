@@ -150,6 +150,7 @@ export default {
           for (let key in data.val()) {
             let element = data.val()[key];
             let p = document.createElement("p");
+            p.setAttribute("class", "mensaje");
             p.append(element.nombre + ": " + element.mensaje);
             document.getElementById("mensajes").append(p);
           }
@@ -206,7 +207,7 @@ export default {
 h1.section {
   padding: 20px;
 }
-#mensajes {
+.mensaje {
   background-color: rgba(255, 255, 255, 0.788);
   color: black;
   border: solid 3px darkblue;
