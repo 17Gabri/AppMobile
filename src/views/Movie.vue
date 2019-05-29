@@ -76,6 +76,7 @@
               <v-layout column v-show="!hidden" v-if=" user">
                 <v-flex id="mensajes"></v-flex>
                 <v-textarea
+                  @keydown="tecla"
                   color="black"
                   ref="form"
                   :clearable="true"
@@ -88,7 +89,7 @@
                 ></v-textarea>
                 <v-layout justify-center>
                   <v-flex xs6>
-                    <v-btn color="black" @click="sendMessage">Escribe tu crítica</v-btn>
+                    <v-btn color="black" @click="sendMessage" id="boton">Escribe tu crítica</v-btn>
                   </v-flex>
                 </v-layout>
               </v-layout>
@@ -163,6 +164,17 @@ export default {
     login() {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider);
+    },
+
+    tecla(event) {
+      // PARA VER QUE TECLA ESTA PRESIONADO
+      // alert(event.keyCode);
+
+      //VALIDO LA TECLA PRESIONADA
+      if (event.keyCode == 13) {
+        //13 = ENTER
+        this.sendMessage(); //AQUI PUEDES PONER EL ENVIO DEL FORMULARIO : document.formulario.submit;
+      }
     }
   },
   computed: {
@@ -219,6 +231,8 @@ h1.section {
   padding: 10px;
 }
 #mensajes {
+  height: 200px;
+  overflow: scroll;
   scroll-behavior: smooth;
 }
 </style>
