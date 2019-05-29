@@ -5,6 +5,7 @@
         <v-toolbar-title class="white--text">
           <img class="logo" src="./assets/logo.png" height="75" width="75">
         </v-toolbar-title>
+        <v-toolbar-title class="toolbar"></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn fab small color="cyan" dark href="javascript:history.back()">
           <v-icon dark>arrow_back</v-icon>
@@ -185,6 +186,15 @@ img.avatar {
 }
 .toTop {
   margin-bottom: 30px;
+}
+@media (orientation: landscape) {
+  .toolbar::before {
+    padding-left: 47%;
+    font-size: 30px;
+    font-weight: negrita;
+    color: white;
+    content: "GabiFilms ";
+  }
 }
 </style>
 
