@@ -134,12 +134,15 @@ export default {
         nombre: name,
         mensaje: texto
       };
-
-      firebase
-        .database()
-        .ref(this.movieDetails.title)
-        .push(messageToSend);
-      this.$refs.form.reset();
+      if (texto.trim().length > 0) {
+        firebase
+          .database()
+          .ref(this.movieDetails.title)
+          .push(messageToSend);
+        this.$refs.form.reset();
+      } else {
+        alert("No puede enviar una crítica vacía");
+      }
     },
     getMessages() {
       firebase
