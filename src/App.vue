@@ -162,9 +162,9 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
 #top {
-  font-family: "Acme", sans-serif;
+  font-family: "Kaushan Script", cursive;
 }
 #create .v-speed-dial {
   position: absolute;
