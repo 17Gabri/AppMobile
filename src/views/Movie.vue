@@ -154,6 +154,9 @@ export default {
             p.append(element.nombre + ": " + element.mensaje);
             document.getElementById("mensajes").append(p);
           }
+          document.getElementById(
+            "mensajes"
+          ).scrollTop = document.getElementById("mensajes").scrollHeight;
         });
       this.hidden = !this.hidden;
     },
@@ -214,5 +217,8 @@ h1.section {
   border-radius: 5px;
   margin-top: 15px;
   padding: 10px;
+}
+#mensajes {
+  scroll-behavior: smooth;
 }
 </style>

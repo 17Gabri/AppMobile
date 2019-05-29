@@ -162,6 +162,10 @@ export default {
 };
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css?family=Acme&display=swap");
+#top {
+  font-family: "Acme", sans-serif;
+}
 #create .v-speed-dial {
   position: absolute;
 }
@@ -189,7 +193,7 @@ img.avatar {
 }
 @media (orientation: landscape) {
   .toolbar::before {
-    padding-left: 47%;
+    padding-left: 150px;
     font-size: 30px;
     font-weight: negrita;
     color: white;
