@@ -40,7 +40,7 @@
         </v-speed-dial>
       </v-toolbar>
       <v-breadcrumbs class="bread" :items="items"></v-breadcrumbs>
-      <v-btn fab bottom right fixed small color="cyan" dark href="#top">
+      <v-btn fab bottom right fixed small color="cyan" dark href="#top" class="toTop">
         <v-icon dark>keyboard_arrow_up</v-icon>
       </v-btn>
     </v-layout>
@@ -110,14 +110,10 @@ export default {
           userZone.style.visibility = "visible";
           wrapProducts.style.paddingTop = "40px";
           userName.innerHTML = user.displayName;
-          window.loginORlogout(LOGOUT);
-          console.log(user.displayName);
         } else {
           userZone.style.visibility = "hidden";
           wrapProducts.style.paddingTop = "10px";
           userName.innerHTML = "";
-          window.loginORlogout(LOGIN);
-          console.log("sin usuario");
         }
       });
     }
@@ -186,6 +182,9 @@ img.avatar {
 }
 .bread {
   margin-top: 60px;
+}
+.toTop {
+  margin-bottom: 30px;
 }
 </style>
 
