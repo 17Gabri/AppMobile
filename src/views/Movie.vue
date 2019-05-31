@@ -2,7 +2,7 @@
   <v-layout v-if="movieDetails.length != 0">
     <v-flex xs12 sm6 offset-sm3 fill-width fill-height>
       <v-card class="card">
-        <v-layout justify-center>
+        <v-layout justify-center class="bg">
           <v-img
             class="poster"
             max-width="200"
@@ -239,5 +239,9 @@ h1.section {
   height: 200px;
   overflow: scroll;
   scroll-behavior: smooth;
+}
+.bg {
+  background-image: url("../assets/fondoposter.jpg");
+  background-size: cover;
 }
 </style>
