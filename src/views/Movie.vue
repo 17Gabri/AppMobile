@@ -1,12 +1,14 @@
 <template>
-  <v-layout class="bgc" v-if="movieDetails.length != 0">
+  <v-layout v-if="movieDetails.length != 0">
     <v-flex xs12 sm6 offset-sm3 fill-width fill-height>
       <v-card class="card">
-        <v-img
-          class="poster"
-          data-sizes="auto"
-          :src="`https://image.tmdb.org/t/p/w185_and_h278_bestv2${movieDetails.poster_path}`"
-        ></v-img>
+        <v-layout justify-center>
+          <v-img
+            class="poster"
+            max-width="200"
+            :src="`https://image.tmdb.org/t/p/w185_and_h278_bestv2${movieDetails.poster_path}`"
+          ></v-img>
+        </v-layout>
         <v-card-title primary-title id="content">
           <v-flex xs12>
             <v-card dark color="primary">
@@ -237,8 +239,5 @@ h1.section {
   height: 200px;
   overflow: scroll;
   scroll-behavior: smooth;
-}
-.bgc {
-  background-color: rgba(169, 223, 238, 0.548);
 }
 </style>
