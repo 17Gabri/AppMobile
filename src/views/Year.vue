@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout class="bgc" column>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <router-link to="/year/50">
@@ -108,5 +108,8 @@ export default {};
 }
 .container {
   padding-top: 0px;
+}
+.bgc {
+  background-color: rgba(169, 223, 238, 0.548);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="movieDetails.length != 0">
+  <v-layout class="bgc" v-if="movieDetails.length != 0">
     <v-flex xs12 sm6 offset-sm3 fill-width fill-height>
       <v-card class="card">
         <v-img
@@ -237,5 +237,8 @@ h1.section {
   height: 200px;
   overflow: scroll;
   scroll-behavior: smooth;
+}
+.bgc {
+  background-color: rgba(169, 223, 238, 0.548);
 }
 </style>

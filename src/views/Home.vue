@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="actuallyMovies.length != 0">
+  <v-container class="bgc" v-if="actuallyMovies.length != 0">
     <v-layout justify-center class="search">
       <v-flex xs8>
         <v-text-field outline label="Busca tu película" type="text" v-model="searchValue">
@@ -118,6 +118,9 @@ a {
 .loader {
   display: flex;
   justify-content: center;
+}
+.bgc {
+  background-color: rgba(169, 223, 238, 0.548);
 }
 </style>
 

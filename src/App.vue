@@ -163,6 +163,7 @@ export default {
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
+
 #top {
   font-family: "Kaushan Script", cursive;
 }
