@@ -57,7 +57,7 @@
   </v-container>
   <v-container v-else>
     <v-flex class="loader">
-      <v-progress-circular indeterminate color="primary" size="99" width="8"></v-progress-circular>
+      <v-img :src="require('../assets/loader.gif')"></v-img>
     </v-flex>
   </v-container>
 </template>

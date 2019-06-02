@@ -32,9 +32,7 @@
               <v-icon v-else>keyboard_arrow_up</v-icon>
             </v-btn>
           </template>
-          <v-btn fab dark small color="indigo">
-            <v-icon>info</v-icon>
-          </v-btn>
+
           <v-btn fab dark small color="red" @click="logout()">
             <v-icon>close</v-icon>
           </v-btn>
