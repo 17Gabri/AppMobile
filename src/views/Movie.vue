@@ -57,11 +57,22 @@
               <p>{{movieDetails.overview}}</p>
             </v-card>
           </v-flex>
-          <v-flex xs12>
+          <v-layout justify-center column>
             <v-card class="section" dark color="blue">
-              <h2>
-                <u>Chat</u>
-              </h2>
+              <h1 class="font">Trailer</h1>
+              <iframe
+                width="100%"
+                height="300"
+                :src="`https://www.youtube.com/embed/${idTrailer}`"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </v-card>
+          </v-layout>
+          <v-flex xs12>
+            <v-card dark color="blue">
+              <h1 class="section">Chat</h1>
               <v-layout v-if="user == null">
                 <v-flex xs6>
                   <v-btn color="black" @click="login()">Debes iniciar sesión para ver el chat</v-btn>
@@ -117,8 +128,10 @@ export default {
       hidden: true,
       url: "https://api.themoviedb.org/3/movie/",
       url2: "?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+      url3: "/videos?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
       movieDetails: [],
-      show: true
+      show: true,
+      idTrailer: ""
     };
   },
   props: ["id"],
@@ -127,6 +140,11 @@ export default {
       fetch(this.url + this.id + this.url2)
         .then(json => json.json())
         .then(data => (this.movieDetails = data));
+    },
+    getTrailer() {
+      fetch(this.url + this.id + this.url3)
+        .then(json => json.json())
+        .then(data => (this.idTrailer = data.results[0].key));
     },
     sendMessage() {
       let name = firebase.auth().currentUser.displayName;
@@ -202,11 +220,14 @@ export default {
       }
     });
     this.getDetails();
+    this.getTrailer();
   }
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
+
 .section.v-card.v-sheet.theme--dark.blue {
   padding: 10px;
 }
@@ -226,6 +247,8 @@ export default {
 }
 h1.section {
   padding: 20px;
+  text-align: center;
+  font-family: "Kaushan Script", cursive;
 }
 .mensaje {
   background-color: rgba(255, 255, 255, 0.788);
@@ -243,5 +266,9 @@ h1.section {
 .bg {
   background-image: url("../assets/fondoposter.jpg");
   background-size: cover;
+}
+.font {
+  font-family: "Kaushan Script", cursive;
+  text-align: center;
 }
 </style>
