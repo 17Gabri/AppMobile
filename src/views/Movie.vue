@@ -57,7 +57,34 @@
               <p>{{movieDetails.overview}}</p>
             </v-card>
           </v-flex>
-          <v-layout justify-center column>
+          <v-layout justify-center column v-if="idTrailer != ''">
+            <v-card class="section" dark color="blue">
+              <h1 class="font">Reparto</h1>
+              <v-layout row class="reparto">
+                <v-card v-for="actor in cutCast" :key="actor.name" min-width="250" max-height="550">
+                  <v-img
+                    height="350"
+                    :src="`https://image.tmdb.org/t/p/original${actor.profile_path}`"
+                  ></v-img>
+
+                  <v-card>
+                    <p class="headline ml-4">{{actor.name}}</p>
+                  </v-card>
+                  <v-card>
+                    <p class="headline ml-4">{{actor.character}}</p>
+                  </v-card>
+                </v-card>
+              </v-layout>
+              <router-link :to="'/cast/' + Number(movieDetails.id)">
+                <v-card height="40px">
+                  <p class="link">
+                    <u>Pulsa para ver el reparto completo</u>
+                  </p>
+                </v-card>
+              </router-link>
+            </v-card>
+          </v-layout>
+          <v-layout justify-center column v-if="idTrailer != ''">
             <v-card class="section" dark color="blue">
               <h1 class="font">Trailer</h1>
               <iframe
@@ -129,9 +156,12 @@ export default {
       url: "https://api.themoviedb.org/3/movie/",
       url2: "?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
       url3: "/videos?api_key=18661481496a15370caf925d682d33b0&language=es-ES",
+      url4: "/credits?api_key=18661481496a15370caf925d682d33b0",
       movieDetails: [],
       show: true,
-      idTrailer: ""
+      idTrailer: "",
+      cast: [],
+      cutedCast: []
     };
   },
   props: ["id"],
@@ -146,6 +176,12 @@ export default {
         .then(json => json.json())
         .then(data => (this.idTrailer = data.results[0].key));
     },
+    getCast() {
+      fetch(this.url + this.id + this.url4)
+        .then(json => json.json())
+        .then(data => (this.cast = data.cast));
+    },
+
     sendMessage() {
       let name = firebase.auth().currentUser.displayName;
       let texto = document.getElementById("text").value;
@@ -201,6 +237,9 @@ export default {
     }
   },
   computed: {
+    cutCast() {
+      return this.cast.slice(0, 5);
+    },
     activeFab() {
       return { color: "cyan", icon: "keyboard_arrow_down" };
     },
@@ -221,6 +260,7 @@ export default {
     });
     this.getDetails();
     this.getTrailer();
+    this.getCast();
   }
 };
 </script>
@@ -253,7 +293,7 @@ h1.section {
 .mensaje {
   background-color: rgba(255, 255, 255, 0.788);
   color: black;
-  border: solid 3px darkblue;
+  border: solid 3px #00008b;
   border-radius: 5px;
   margin-top: 15px;
   padding: 10px;
@@ -270,5 +310,15 @@ h1.section {
 .font {
   font-family: "Kaushan Script", cursive;
   text-align: center;
+}
+.reparto {
+  max-width: 100vw;
+  overflow: scroll;
+}
+.v-card.v-sheet.theme--dark {
+  background-color: rgba(0, 0, 0, 0.541);
+}
+.link {
+  font-size: 16px;
 }
 </style>
