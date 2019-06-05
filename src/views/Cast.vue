@@ -1,7 +1,19 @@
-<template>
-  <v-container v-if="cast.length != 0">
-    <v-card v-for="actor in cast" :key="actor.name" min-width="250" max-height="550">
-      <v-img height="350" :src="`https://image.tmdb.org/t/p/original${actor.profile_path}`"></v-img>
+ <template>
+  <v-container class="bgc" v-if="cast.length != 0">
+    <v-card
+      v-for="actor in cast"
+      :key="actor.name"
+      min-width="250"
+      max-height="550"
+      dark
+      color="blue"
+    >
+      <v-img
+        v-if="actor.profile_path != null"
+        height="350"
+        :src="`https://image.tmdb.org/t/p/original${actor.profile_path}`"
+      ></v-img>
+      <v-img v-else height="350" :src="require('../assets/placeholderh.jpg')"></v-img>
 
       <v-card>
         <p class="headline ml-4">{{actor.name}}</p>
@@ -46,4 +58,7 @@ export default {
 </script>
 
 <style>
+.bgc {
+  background-color: rgba(169, 223, 238, 0.548);
+}
 </style>
