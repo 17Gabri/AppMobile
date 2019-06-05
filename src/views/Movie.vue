@@ -63,7 +63,7 @@
               <v-layout row class="reparto">
                 <v-card v-for="actor in cutCast" :key="actor.name" min-width="250" max-height="550">
                   <v-img
-                    contain&#x3C;
+                    contain
                     v-if="actor.profile_path != null"
                     height="250"
                     :src="`https://image.tmdb.org/t/p/original${actor.profile_path}`"
