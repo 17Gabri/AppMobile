@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Loading from "./views/Loading.vue";
 import Movie from "./views/Movie.vue";
+import Actor from "./views/Actor.vue";
 import Genre from "./views/Genre.vue";
 import Year from "./views/Year.vue";
 import GenreFilter from "./views/Filter.vue";
@@ -29,6 +30,12 @@ export default new Router({
       path: "/movie/:id",
       name: "movie",
       component: Movie,
+      props: true
+    },
+    {
+      path: "/actor/:id",
+      name: "actor",
+      component: Actor,
       props: true
     },
     {
