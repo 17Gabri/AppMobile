@@ -37,20 +37,14 @@
               <v-card class="section" dark color="blue" row>
                 <v-layout row>
                   <v-flex xs12>
-                    <h2>
+                    <h2 class="font">
                       <u>Bio</u>
                     </h2>
-                    <p>
-                      <u class="title">Fecha de Nacimiento:</u>
-                    </p>
+                    <p class="title">Fecha de Nacimiento:</p>
                     <p>{{actorDetails.birthday}}</p>
-                    <p>
-                      <u class="title">Lugar de Nacimiento:</u>
-                    </p>
+                    <p class="title">Lugar de Nacimiento:</p>
                     <p>{{actorDetails.place_of_birth}}</p>
-                    <p>
-                      <u class="title">Biografía:</u>
-                    </p>
+                    <p class="title" v-if="actorDetails.biography != ''">Biografía:</p>
                     <p>{{actorDetails.biography}}</p>
                   </v-flex>
                 </v-layout>
@@ -59,7 +53,7 @@
           </v-layout>
           <v-flex xs12>
             <v-card class="section" dark color="blue">
-              <h2>
+              <h2 class="font">
                 <u>Filmografía</u>
               </h2>
               <v-card
@@ -139,6 +133,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
+
 span.headline {
   background-color: rgb(0, 0, 0);
 }
@@ -151,5 +147,10 @@ span.headline {
 }
 .title {
   font-size: 20px;
+}
+.font {
+  font-family: "Kaushan Script", cursive;
+  text-align: center;
+  margin-bottom: 10px;
 }
 </style>
